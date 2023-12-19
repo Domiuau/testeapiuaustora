@@ -1,7 +1,8 @@
-package br.com.aplicacao.demo.security.config;
+package br.com.aplicacao.demo.services;
 
 
 import br.com.aplicacao.demo.repository.UsuarioRepository;
+import br.com.aplicacao.demo.security.config.TokenService;
 import ch.qos.logback.core.subst.Token;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
