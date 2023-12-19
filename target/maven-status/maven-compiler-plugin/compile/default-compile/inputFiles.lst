@@ -1,0 +1,17 @@
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\DadosAtualizarUsuarioDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\services\SecurityFilter.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\AutenticacaoDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\services\AuthorizationService.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\UsuarioController.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\UsuarioRepository.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\DemoApplication.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\LoginResponseDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\TipoDeUsuario.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\RegistroDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\DadosUsuarioDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\SecurityConfigurations.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\TokenService.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Usuario.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\ErroCadastroDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\TratadorDeErros.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\AutenticacaoController.java
