@@ -11,6 +11,7 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\Regis
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\DadosUsuarioDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\SecurityConfigurations.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\TokenService.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\WebConfig.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Usuario.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\ErroCadastroDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\TratadorDeErros.java
