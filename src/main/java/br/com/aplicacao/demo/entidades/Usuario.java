@@ -5,6 +5,8 @@ import br.com.aplicacao.demo.dto.DadosAtualizarUsuarioDTO;
 import br.com.aplicacao.demo.dto.RegistroDTO;
 import br.com.aplicacao.demo.enums.TipoDeUsuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,20 +34,24 @@ public class Usuario implements UserDetails {
     private String id;
 
     @Column(nullable = false)
+    @NotBlank
     private String apelido;
 
-    @Column(name = "senha", nullable = false)
+    @Column(name = "senha")
+    @NotBlank
     private String password;
 
-    @Column(nullable = false)
+    @NotBlank
     private String username;
 
+
+    @NotBlank
     @Email(message = "O email deve ser válido")
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
+    @NotNull
     private String telefone;
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private TipoDeUsuario tipoDeUsuario;
 
     private boolean enabled;
@@ -56,7 +62,7 @@ public class Usuario implements UserDetails {
         this.apelido = registroDTO.apelido();
         this.username = registroDTO.nomeDeUsuario();
         this.email = registroDTO.email();
-        this.tipoDeUsuario = registroDTO.tipo();
+        this.tipoDeUsuario = registroDTO.tipo().getTipo().isEmpty() ? TipoDeUsuario.USER : registroDTO.tipo();
         this.password = senhaEncriptada;
         this.telefone = registroDTO.telefone();
         this.enabled = true;

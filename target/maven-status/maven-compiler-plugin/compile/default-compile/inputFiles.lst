@@ -5,8 +5,10 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\services\
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\UsuarioController.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\UsuarioRepository.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\DemoApplication.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\postgre\TratadorDeErrosPg.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\LoginResponseDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\TipoDeUsuario.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\mysql\TratadorDeErrosMySql.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\RegistroDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\DadosUsuarioDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\SecurityConfigurations.java

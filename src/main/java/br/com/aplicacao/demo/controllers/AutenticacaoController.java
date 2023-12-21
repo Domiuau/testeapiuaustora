@@ -2,24 +2,18 @@ package br.com.aplicacao.demo.controllers;
 
 import br.com.aplicacao.demo.dto.*;
 import br.com.aplicacao.demo.entidades.Usuario;
-import br.com.aplicacao.demo.erros.TratadorDeErros;
 import br.com.aplicacao.demo.repository.UsuarioRepository;
 import br.com.aplicacao.demo.security.config.TokenService;
-import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -50,7 +44,7 @@ public class AutenticacaoController {
 
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AutenticacaoDTO autenticacaoDTO) {
+    public ResponseEntity login(@RequestBody @Valid AutenticacaoDTO autenticacaoDTO) {
 
         System.out.println("Login " + autenticacaoDTO);
 
@@ -85,7 +79,7 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegistroDTO registroDTO) {
+    public ResponseEntity register(@RequestBody @Valid RegistroDTO registroDTO) {
 
         System.out.println("Registro");
 
