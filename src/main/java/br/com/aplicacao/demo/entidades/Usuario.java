@@ -51,7 +51,6 @@ public class Usuario implements UserDetails {
     @NotNull
     private String telefone;
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private TipoDeUsuario tipoDeUsuario;
 
     private boolean enabled;
@@ -62,6 +61,7 @@ public class Usuario implements UserDetails {
         this.apelido = registroDTO.apelido();
         this.username = registroDTO.nomeDeUsuario();
         this.email = registroDTO.email();
+        this.tipoDeUsuario = registroDTO.tipo();
         this.tipoDeUsuario = registroDTO.tipo().getTipo().isEmpty() ? TipoDeUsuario.USER : registroDTO.tipo();
         this.password = senhaEncriptada;
         this.telefone = registroDTO.telefone();
