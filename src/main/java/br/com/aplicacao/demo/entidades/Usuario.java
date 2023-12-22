@@ -1,6 +1,7 @@
 package br.com.aplicacao.demo.entidades;
 
 
+import br.com.aplicacao.demo.dto.AutenticacaoDTO;
 import br.com.aplicacao.demo.dto.DadosAtualizarUsuarioDTO;
 import br.com.aplicacao.demo.dto.RegistroDTO;
 import br.com.aplicacao.demo.enums.TipoDeUsuario;
@@ -155,12 +156,14 @@ public class Usuario implements UserDetails {
             this.username = dadosUsuarioDTO.nomeDeUsuario();
         if (!this.email.equals(dadosUsuarioDTO.email()))
             this.email = dadosUsuarioDTO.email();
-        if (!new BCryptPasswordEncoder().encode(this.password).equals(dadosUsuarioDTO.senha()))
+        if (!new BCryptPasswordEncoder().matches(dadosUsuarioDTO.senha(), this.password))
             this.password = new BCryptPasswordEncoder().encode(dadosUsuarioDTO.senha());
         if (!this.telefone.equals(dadosUsuarioDTO.telefone()))
             this.telefone = dadosUsuarioDTO.telefone();
 
     }
+
+
 
     public void desativar() {
 

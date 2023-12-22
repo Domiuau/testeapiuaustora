@@ -6,6 +6,7 @@ import br.com.aplicacao.demo.repository.UsuarioRepository;
 import br.com.aplicacao.demo.security.config.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,20 +55,18 @@ public class AutenticacaoController {
 
         var authentication = authenticationManager.authenticate(usernamePassword);
 
+        if (authentication != null) {
 
-        System.out.println("authentication");
-        var token = tokenService.generateToken((Usuario) authentication.getPrincipal());
-
-
-        System.out.println(token + " fdsfsdfds");
-
-       Usuario usuario = (Usuario) usuarioRepository.findByUsername(autenticacaoDTO.nomeDeUsuario());
-
-       DadosUsuarioDTO dadosUsuarioDTO = new DadosUsuarioDTO(usuario.getId(), usuario.getApelido(), usuario.getUsername(),
-               usuario.getPassword(), usuario.getEmail(), usuario.getTelefone());
+            System.out.println("authentication");
+            var token = tokenService.generateToken((Usuario) authentication.getPrincipal());
 
 
+            System.out.println(token + " fdsfsdfds");
 
+            Usuario usuario = (Usuario) usuarioRepository.findByUsername(autenticacaoDTO.nomeDeUsuario());
+
+            DadosUsuarioDTO dadosUsuarioDTO = new DadosUsuarioDTO(usuario.getId(), usuario.getApelido(), usuario.getUsername(),
+                    usuario.getPassword(), usuario.getEmail(), usuario.getTelefone());
 
 
 
@@ -75,26 +74,20 @@ public class AutenticacaoController {
 
 
 
-        return ResponseEntity.ok(new LoginResponseDTO(token, dadosUsuarioDTO));
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegistroDTO registroDTO) {
-
-        System.out.println("Registro");
-
-        String senhaEncriptada = new BCryptPasswordEncoder().encode(registroDTO.senha());
 
 
 
-        Usuario usuario = new Usuario(registroDTO, senhaEncriptada);
-        usuarioRepository.save(usuario);
+            return ResponseEntity.ok(new LoginResponseDTO(token, dadosUsuarioDTO));
 
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário " + autenticacaoDTO.nomeDeUsuario() + " não encontrado ou senha incorreta.");
+        }
 
-        return ResponseEntity.ok(registroDTO);
 
 
     }
+
+
 
 
 }
