@@ -1,9 +1,8 @@
 package br.com.aplicacao.demo.entidades;
 
 
-import br.com.aplicacao.demo.dto.AutenticacaoDTO;
-import br.com.aplicacao.demo.dto.DadosAtualizarUsuarioDTO;
-import br.com.aplicacao.demo.dto.RegistroDTO;
+import br.com.aplicacao.demo.dto.usuario.DadosAtualizarUsuarioDTO;
+import br.com.aplicacao.demo.dto.usuario.RegistroDTO;
 import br.com.aplicacao.demo.enums.TipoDeUsuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -44,8 +44,6 @@ public class Usuario implements UserDetails {
 
     @NotBlank
     private String username;
-
-
     @NotBlank
     @Email(message = "O email deve ser válido")
     private String email;
@@ -53,6 +51,11 @@ public class Usuario implements UserDetails {
     private String telefone;
     @Enumerated(EnumType.STRING)
     private TipoDeUsuario tipoDeUsuario;
+
+    @OneToMany(mappedBy = "idUsuario", cascade = CascadeType.ALL)
+    List<Produto> anuncios = new ArrayList<>();
+
+    
 
     private boolean enabled;
 
@@ -62,7 +65,6 @@ public class Usuario implements UserDetails {
         this.apelido = registroDTO.apelido();
         this.username = registroDTO.nomeDeUsuario();
         this.email = registroDTO.email();
-        this.tipoDeUsuario = registroDTO.tipo();
         this.tipoDeUsuario = registroDTO.tipo().getTipo().isEmpty() ? TipoDeUsuario.USER : registroDTO.tipo();
         this.password = senhaEncriptada;
         this.telefone = registroDTO.telefone();
@@ -86,6 +88,14 @@ public class Usuario implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public List<Produto> getAnuncios() {
+        return anuncios;
+    }
+
+    public void setAnuncios(List<Produto> anuncios) {
+        this.anuncios = anuncios;
     }
 
     @Override

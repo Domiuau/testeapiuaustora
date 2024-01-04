@@ -1,0 +1,1 @@
+ALTER TABLE variacao_do_produto ALTER COLUMN preco TYPE NUMERIC(10,2) USING preco::numeric(10,2);

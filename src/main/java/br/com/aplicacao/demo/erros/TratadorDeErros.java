@@ -17,15 +17,16 @@ public class TratadorDeErros {
 
 
 
-    @ExceptionHandler(JWTDecodeException.class)
-    public ResponseEntity tratarErro403(JWTDecodeException ex) {
-        var erros = ex.getMessage().split("=");
+//    @ExceptionHandler(JWTDecodeException.class)
+//    public ResponseEntity tratarErro403(JWTDecodeException ex) {
+//        var erros = ex.getMessage().split("=");
+//
+//
+//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Código inválido ou expirado.");
+//
+//        //  return ResponseEntity.badRequest().body(new DadosErroValidacao(erros[3].split("\\.")[1],erros[1] + " já está em uso."));
+//    }
 
-
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Código inválido ou expirado.");
-
-        //  return ResponseEntity.badRequest().body(new DadosErroValidacao(erros[3].split("\\.")[1],erros[1] + " já está em uso."));
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro403(MethodArgumentNotValidException ex) {

@@ -29,10 +29,17 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/auth/aa").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/auth/carro").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/produto/anunciar").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/usuario/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/usuario/listagem/{pagina}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/de/{idUsuario}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/teste").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/{pagina}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produto/id/{id}").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class )
