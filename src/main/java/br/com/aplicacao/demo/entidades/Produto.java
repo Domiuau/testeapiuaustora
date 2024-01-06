@@ -21,7 +21,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode(of = "id")
 
 public class Produto {
 
@@ -45,7 +45,7 @@ public class Produto {
     @Enumerated(EnumType.STRING)
     private TipoDeGarantia tipoGarantia;
 
-    private String fimGarantia;
+    private int diasDeGarantia;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -64,7 +64,7 @@ public class Produto {
         this.ativo = true;
         this.fabricante = fabricante;
         this.tipoGarantia = tipoGarantia;
-        this.fimGarantia = currentDate.plusDays(duracaoGarantia).format(formatter);
+        this.diasDeGarantia = duracaoGarantia;
         this.idUsuario = idUsuario;
         variacoes.forEach(variacao -> variacao.setProduto(this));
         this.variacoesDoProduto = variacoes;
@@ -82,7 +82,7 @@ public class Produto {
         this.ativo = true;
         this.fabricante = anunciarProdutoDTO.fabricante();
         this.tipoGarantia = anunciarProdutoDTO.tipoGarantia();
-        this.fimGarantia = currentDate.plusDays(anunciarProdutoDTO.duracaoGarantia()).format(formatter);
+        this.diasDeGarantia = anunciarProdutoDTO.duracaoGarantia();
         this.idUsuario = usuario;
         anunciarProdutoDTO.variacoes().forEach(variacao -> this.variacoesDoProduto.add(new VariacaoProduto(variacao, this)));
 
@@ -103,9 +103,13 @@ public class Produto {
                 ", ativo=" + ativo +
                 ", fabricante='" + fabricante + '\'' +
                 ", tipoGarantia=" + tipoGarantia +
-                ", fimGarantia='" + fimGarantia + '\'' +
+                ", fimGarantia='" + diasDeGarantia + '\'' +
                 ", variacoesDoProduto=" + variacoesDoProduto +
                 '}';
+    }
+    public void desativar() {
+
+        this.ativo = false;
     }
 
     public String getId() {
@@ -160,6 +164,14 @@ public class Produto {
         return ativo;
     }
 
+    public int getDiasDeGarantia() {
+        return diasDeGarantia;
+    }
+
+    public void setDiasDeGarantia(int diasDeGarantia) {
+        this.diasDeGarantia = diasDeGarantia;
+    }
+
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
@@ -178,14 +190,6 @@ public class Produto {
 
     public void setTipoGarantia(TipoDeGarantia tipoGarantia) {
         this.tipoGarantia = tipoGarantia;
-    }
-
-    public String getFimGarantia() {
-        return fimGarantia;
-    }
-
-    public void setFimGarantia(String fimGarantia) {
-        this.fimGarantia = fimGarantia;
     }
 
     public Usuario getIdUsuario() {

@@ -2,6 +2,7 @@ package br.com.aplicacao.demo.entidades;
 
 
 import br.com.aplicacao.demo.dto.usuario.DadosAtualizarUsuarioDTO;
+import br.com.aplicacao.demo.dto.usuario.DadosUsuarioDTO;
 import br.com.aplicacao.demo.dto.usuario.RegistroDTO;
 import br.com.aplicacao.demo.enums.TipoDeUsuario;
 import jakarta.persistence.*;
@@ -71,6 +72,7 @@ public class Usuario implements UserDetails {
         this.enabled = true;
 
     }
+
 
 
     @Override

@@ -1,5 +1,6 @@
 package br.com.aplicacao.demo.entidades;
 
+import br.com.aplicacao.demo.dto.produto.ImagemVariacaoProdutoDTO;
 import br.com.aplicacao.demo.repository.ImagemVariacaoProdutoRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,6 +36,18 @@ public class ImagemVariacaoProduto {
     public ImagemVariacaoProduto(byte[] imagem, VariacaoProduto variacaoProduto) {
         this.imagem = imagem;
         this.idVariacaoDoProduto = variacaoProduto;
+    }
+
+    public static List<ImagemVariacaoProdutoDTO> toImagemVariacaoProdutoDTO (List<ImagemVariacaoProduto> imagensVariacaoProduto) {
+
+        ArrayList<ImagemVariacaoProdutoDTO> listaImagensDTO = new ArrayList<>();
+
+        for (ImagemVariacaoProduto i:
+                imagensVariacaoProduto) {
+            listaImagensDTO.add(new ImagemVariacaoProdutoDTO(i.imagem, i.id));
+        }
+
+        return listaImagensDTO;
     }
 
 

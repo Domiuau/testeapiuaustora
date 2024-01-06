@@ -79,7 +79,7 @@ public class ProdutoController {
             for (MultipartFile imagem :
                     request.getFiles("file" + i)) {
 
-                VariacaoProduto variacaoProduto = produto.getVariacoesDoProduto().get(i-1);
+                VariacaoProduto variacaoProduto = produto.getVariacoesDoProduto().get(i - 1);
 
                 variacaoProduto.getImagens().add(new ImagemVariacaoProduto(imagem.getBytes(), variacaoProduto));
 
@@ -91,11 +91,11 @@ public class ProdutoController {
 
         System.out.println("produto:");
         System.out.println(produto.getDescricao());
-        for (VariacaoProduto variacao:
-             produto.getVariacoesDoProduto()) {
+        for (VariacaoProduto variacao :
+                produto.getVariacoesDoProduto()) {
             System.out.println(variacao.getTitulo());
 
-            for (ImagemVariacaoProduto imagem:
+            for (ImagemVariacaoProduto imagem :
                     variacao.getImagens()) {
                 System.out.println(imagem.getImagem());
             }
@@ -104,44 +104,76 @@ public class ProdutoController {
 
         produtoRepository.save(produto);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("Produto criado");
 
     }
 
 //    @GetMapping("/{id}")
 //    public ResponseEntity
 
-    @GetMapping("/de/{idUsuario}")
-    public ResponseEntity<Page<Produto>> getProdutoDe (@PageableDefault (size = 10) Pageable pageable, @PathVariable String idUsuario) {
+    @GetMapping("/de/{idUsuario}/{pagina}")
+    public ResponseEntity getProdutoDe(@PageableDefault(size = 2) Pageable pageable,
+                                       @PathVariable String idUsuario,
+                                       @PathVariable int pagina) {
 
-        var page = produtoRepository.findAllByIdUsuario(usuarioRepository.findById(idUsuario).get(), pageable);
-        //Page<DadosProdutoVitrineDTO> paginasDTO = page.map(DadosProdutoVitrineDTO::new);
+        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+
+        if (usuario.isPresent()) {
+
+            pageable = PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort());
+            Page<Produto> page = produtoRepository.findAllByIdUsuarioAndAtivoTrue(usuario.get(), pageable);
+            Page<DadosProdutoVitrineDTO> pageDTO = page.map(DadosProdutoVitrineDTO::new);
+
+            return ResponseEntity.ok().body(pageDTO);
 
 
-        System.out.println(page.toString());
-
-        for (Produto pr :
-                page) {
-          //  System.out.println(pr.getVariacoesDoProduto().get(0).getImagens().get(0));
+        } else {
+            return ResponseEntity.badRequest().body("Usuário não encontrado");
         }
-
-//        for (DadosProdutoVitrineDTO a:
-//                paginasDTO) {
-//            System.out.println(a);
-//            aa.add(new DadosProdutoDTO())
-//        }
-//        System.out.println(paginasDTO.toString());
-        return ResponseEntity.ok(null);
 
     }
 
+    @GetMapping("/categorias")
+    public ResponseEntity<List<Categoria>> getCategorias() {
+        return ResponseEntity.ok(Categoria.CATEGORIAS);
+    }
+
+    @GetMapping("/subcategorias/{categoria}")
+    public ResponseEntity<List<SubCategoria>> getSubCategorias(@PathVariable String categoria) {
+        System.out.println("jhgdfghghj");
+        return ResponseEntity.ok(Categoria.valueOf(categoria).getSubCategorias());
+    }
+
+    @GetMapping("/categoria/{categoria}/{pagina}")
+    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getProdutosPelaCategoria(@PathVariable String categoria,
+                                                                                 @PageableDefault(size = 3) Pageable pageable,
+                                                                                 @PathVariable int pagina) {
+
+        return ResponseEntity.ok(produtoRepository.findAllByCategoriaAndAtivoTrue(
+                PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort()), Categoria.valueOf(categoria)).map(DadosProdutoVitrineDTO::new));
+    }
+
+    @GetMapping("/subcategoria/{subCategoria}/{pagina}")
+    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getProdutosPelaSubCategoria(@PathVariable String subCategoria,
+                                                                                 @PageableDefault(size = 3) Pageable pageable,
+                                                                                 @PathVariable int pagina) {
+
+        return ResponseEntity.ok(produtoRepository.findAllBySubCategoriaAndAtivoTrue(
+                PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort()), SubCategoria.valueOf(subCategoria)).map(DadosProdutoVitrineDTO::new));
+    }
+
     @GetMapping("/id/{id}")
-    public ResponseEntity getProduto (@PathVariable String id) {
+    public ResponseEntity getProduto(@PathVariable String id) {
 
         Optional<Produto> produto = produtoRepository.findById(id);
 
         if (produto.isPresent()) {
-            return ResponseEntity.ok(produto.get().getFabricante());
+
+            DadosProdutoDTO dadosProdutoDTO = new DadosProdutoDTO(produto.get());
+
+            System.out.println(dadosProdutoDTO);
+            return ResponseEntity.ok(dadosProdutoDTO);
+
 
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
@@ -150,15 +182,15 @@ public class ProdutoController {
     }
 
     @GetMapping("/{pagina}")
-    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getGeral (@PageableDefault(size = 3) Pageable pageable,
-    @PathVariable int pagina) {
+    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getGeral(@PageableDefault(size = 3) Pageable pageable,
+                                                                 @PathVariable int pagina) {
 
         pageable = PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort());
 
-        var paginaDeProdutos = produtoRepository.findAll(pageable);
+        var paginaDeProdutos = produtoRepository.findAllByAtivoTrue(pageable);
         var paginaVitrineDTO = paginaDeProdutos.map(DadosProdutoVitrineDTO::new);
 
-        for (Produto p:
+        for (Produto p :
                 paginaDeProdutos) {
             System.out.println(p);
         }
@@ -168,7 +200,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/teste")
-    public ResponseEntity aaa () {
+    public ResponseEntity aaa() {
 //        List<Produto> lista = produtoRepository.findAll();
 //        //System.out.println(lista.get(0).getImagens().get(0));
 //        System.out.println(lista.size());
@@ -176,7 +208,31 @@ public class ProdutoController {
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
+    @DeleteMapping("/desativar/{id}")
+    public ResponseEntity<String> desativar(@RequestHeader(name = "Authorization") String token,
+                                            @PathVariable String id) {
 
+        var login = tokenService.validateToken(token.replace("Bearer ", ""));
+        Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
+
+        Optional<Produto> produto = produtoRepository.findById(id);
+
+        if (produto.isPresent()) {
+
+            if (usuario.getAnuncios().contains(produto.get())) {
+                produto.get().desativar();
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(id + " foi deletado");
+            } else {
+                return ResponseEntity.badRequest().body("O produto não pertence a este usuário");
+            }
+
+        } else {
+            return ResponseEntity.badRequest().body(id + " não encontrado");
+        }
+
+
+    }
 
 
 }

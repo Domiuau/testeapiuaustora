@@ -3,9 +3,12 @@ package br.com.aplicacao.demo.enums.categorias;
 import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum Categoria {
+
+
 
 
     CASA("casa", new ArrayList<>(
@@ -30,6 +33,7 @@ public enum Categoria {
 
 
 
+    public static ArrayList<Categoria> CATEGORIAS = new ArrayList<>(Arrays.asList(CASA, CARRO, COMPUTADOR));
     private String categoria;
     private ArrayList<SubCategoria> subCategorias;
 

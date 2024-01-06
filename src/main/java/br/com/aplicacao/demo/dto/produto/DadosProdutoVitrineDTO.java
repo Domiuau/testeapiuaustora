@@ -17,11 +17,15 @@ public record DadosProdutoVitrineDTO (String id,
                                       EstadoDoProduto estado,
                                       String fabricante,
                                       TipoDeGarantia tipoGarantia,
-                                      String imagemPrincipal) {
+                                      String imagemPrincipal,
+                                      double preco,
+                                      String titulo) {
 
 
 
     public DadosProdutoVitrineDTO(Produto produto) {
-        this(produto.getId(), produto.getEstado(), produto.getFabricante(), produto.getTipoGarantia(), produto.getVariacoesDoProduto().get(0).getImagens().isEmpty() ? null : Base64.getEncoder().encodeToString(produto.getVariacoesDoProduto().get(0).getImagens().get(0).getImagem()));
+        this(produto.getId(), produto.getEstado(), produto.getFabricante(), produto.getTipoGarantia(),
+                produto.getVariacoesDoProduto().get(0).getImagens().isEmpty() ? null : Base64.getEncoder().encodeToString(produto.getVariacoesDoProduto().get(0).getImagens().get(0).getImagem()),
+                produto.getVariacoesDoProduto().get(0).getPreco(), produto.getVariacoesDoProduto().get(0).getTitulo());
     }
 }

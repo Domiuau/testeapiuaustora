@@ -150,13 +150,13 @@ public class UsuarioController {
 
     @Transactional
     @DeleteMapping("/desativar")
-    public ResponseEntity desativarUsuario (@RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<String> desativarUsuario (@RequestHeader(name = "Authorization") String token) {
 
         var login = tokenService.validateToken(token.replace("Bearer ",""));
         Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
         usuario.desativar();
 
-        return ResponseEntity.ok("A conta " + usuario.getUsername() + " foi desativada");
+        return ResponseEntity.status (HttpStatus.NO_CONTENT).body("A conta " + usuario.getUsername() + " foi desativada");
 
 
 

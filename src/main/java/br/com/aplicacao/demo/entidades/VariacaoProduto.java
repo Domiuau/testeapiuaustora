@@ -1,5 +1,6 @@
 package br.com.aplicacao.demo.entidades;
 
+import br.com.aplicacao.demo.dto.produto.ImagemVariacaoProdutoDTO;
 import br.com.aplicacao.demo.dto.produto.VariacaoProdutoDTO;
 import br.com.aplicacao.demo.repository.VariacaoProdutoRepository;
 import jakarta.persistence.*;
@@ -65,6 +66,21 @@ public class VariacaoProduto {
                 ", estoque=" + estoque +
                 ", imagens=" + imagens +
                 '}';
+    }
+
+
+
+    public static List<VariacaoProdutoDTO> toVariacaoProdutoDTO (List<VariacaoProduto> variacoesProduto) {
+
+        ArrayList<VariacaoProdutoDTO> variacaoProdutoDTOS = new ArrayList<>();
+
+        for (VariacaoProduto v:
+             variacoesProduto) {
+            variacaoProdutoDTOS.add(new VariacaoProdutoDTO(v.getTitulo(), v.getPreco(), v.getEstoque(), ImagemVariacaoProduto.toImagemVariacaoProdutoDTO(v.getImagens())));
+
+        }
+
+        return variacaoProdutoDTOS;
     }
 
     public String getId() {

@@ -8,6 +8,7 @@ public class TesteEnums {
         Categoria a = Categoria.valueOf("CASA");
         a.setSubCategoria(SubCategoria.valueOf("CASA1"));
         System.out.println(a.getSubCategoria());
+        System.out.println(Categoria.CATEGORIAS);
 
     }
 }
