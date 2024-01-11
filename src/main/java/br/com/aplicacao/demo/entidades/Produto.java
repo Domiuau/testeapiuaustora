@@ -45,30 +45,17 @@ public class Produto {
     @Enumerated(EnumType.STRING)
     private TipoDeGarantia tipoGarantia;
 
+    private boolean freteGratis;
+    private boolean entregaFull;
+
     private int diasDeGarantia;
+
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario idUsuario;
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<VariacaoProduto> variacoesDoProduto = new ArrayList<>();
-
-    public Produto(EstadoDoProduto estado, String descricao, Categoria categoria, int duracaoGarantia, String fabricante, TipoDeGarantia tipoGarantia, Usuario idUsuario, List<VariacaoProduto> variacoes) {
-        this.estado = estado;
-        this.descricao = descricao;
-        this.categoria = categoria;
-        this.subCategoria = categoria.getSubCategoria();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.dataAnuncio = currentDate.format(formatter);
-        this.ativo = true;
-        this.fabricante = fabricante;
-        this.tipoGarantia = tipoGarantia;
-        this.diasDeGarantia = duracaoGarantia;
-        this.idUsuario = idUsuario;
-        variacoes.forEach(variacao -> variacao.setProduto(this));
-        this.variacoesDoProduto = variacoes;
-    }
 
     public Produto(AnunciarProdutoDTO anunciarProdutoDTO, Usuario usuario) {
 
@@ -80,6 +67,8 @@ public class Produto {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.dataAnuncio = currentDate.format(formatter);
         this.ativo = true;
+        this.entregaFull = anunciarProdutoDTO.entregaFull();
+        this.freteGratis = anunciarProdutoDTO.freteGratis();
         this.fabricante = anunciarProdutoDTO.fabricante();
         this.tipoGarantia = anunciarProdutoDTO.tipoGarantia();
         this.diasDeGarantia = anunciarProdutoDTO.duracaoGarantia();
@@ -202,6 +191,22 @@ public class Produto {
 
     public List<VariacaoProduto> getVariacoesDoProduto() {
         return variacoesDoProduto;
+    }
+
+    public boolean isFreteGratis() {
+        return freteGratis;
+    }
+
+    public void setFreteGratis(boolean freteGratis) {
+        this.freteGratis = freteGratis;
+    }
+
+    public boolean isEntregaFull() {
+        return entregaFull;
+    }
+
+    public void setEntregaFull(boolean entregaFull) {
+        this.entregaFull = entregaFull;
     }
 
     public void setVariacoesDoProduto(List<VariacaoProduto> variacoesDoProduto) {

@@ -182,7 +182,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{pagina}")
-    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getGeral(@PageableDefault(size = 3) Pageable pageable,
+    public ResponseEntity<Page<DadosProdutoVitrineDTO>> getGeral(@PageableDefault(size = 16) Pageable pageable,
                                                                  @PathVariable int pagina) {
 
         pageable = PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort());

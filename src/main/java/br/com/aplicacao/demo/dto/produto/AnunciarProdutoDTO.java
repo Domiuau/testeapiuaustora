@@ -18,6 +18,8 @@ public record AnunciarProdutoDTO (
         String fabricante,
         TipoDeGarantia tipoGarantia,
         int duracaoGarantia,
+        boolean freteGratis,
+        boolean entregaFull,
         List<VariacaoProdutoDTO> variacoes
 
 ) {

@@ -39,6 +39,7 @@ public class VariacaoProduto {
     private String titulo;
 
     private double preco;
+    private double preco_desconto;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
@@ -53,6 +54,7 @@ public class VariacaoProduto {
 
         this.titulo = variacao.titulo();
         this.preco = variacao.preco();
+        this.preco_desconto = variacao.precoDesconto();
         this.produto = produto;
         this.estoque = variacao.quantidade();
     }
@@ -76,7 +78,7 @@ public class VariacaoProduto {
 
         for (VariacaoProduto v:
              variacoesProduto) {
-            variacaoProdutoDTOS.add(new VariacaoProdutoDTO(v.getTitulo(), v.getPreco(), v.getEstoque(), ImagemVariacaoProduto.toImagemVariacaoProdutoDTO(v.getImagens())));
+            variacaoProdutoDTOS.add(new VariacaoProdutoDTO(v.getTitulo(), v.getPreco(), v.getPreco_desconto(), v.getEstoque(), ImagemVariacaoProduto.toImagemVariacaoProdutoDTO(v.getImagens())));
 
         }
 
@@ -105,6 +107,14 @@ public class VariacaoProduto {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public double getPreco_desconto() {
+        return preco_desconto;
+    }
+
+    public void setPreco_desconto(double preco_desconto) {
+        this.preco_desconto = preco_desconto;
     }
 
     public List<ImagemVariacaoProduto> getImagens() {
