@@ -3,13 +3,10 @@ package br.com.aplicacao.demo.controllers;
 import br.com.aplicacao.demo.dto.produto.AnunciarProdutoDTO;
 import br.com.aplicacao.demo.dto.produto.DadosProdutoDTO;
 import br.com.aplicacao.demo.dto.produto.DadosProdutoVitrineDTO;
-import br.com.aplicacao.demo.dto.produto.VariacaoProdutoDTO;
 import br.com.aplicacao.demo.entidades.ImagemVariacaoProduto;
 import br.com.aplicacao.demo.entidades.Produto;
 import br.com.aplicacao.demo.entidades.Usuario;
 import br.com.aplicacao.demo.entidades.VariacaoProduto;
-import br.com.aplicacao.demo.enums.EstadoDoProduto;
-import br.com.aplicacao.demo.enums.TipoDeGarantia;
 import br.com.aplicacao.demo.enums.categorias.Categoria;
 import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
 import br.com.aplicacao.demo.repository.ImagemVariacaoProdutoRepository;
@@ -17,7 +14,6 @@ import br.com.aplicacao.demo.repository.ProdutoRepository;
 import br.com.aplicacao.demo.repository.UsuarioRepository;
 import br.com.aplicacao.demo.repository.VariacaoProdutoRepository;
 import br.com.aplicacao.demo.security.config.TokenService;
-import ch.qos.logback.core.subst.Token;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,17 +27,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("/produto")

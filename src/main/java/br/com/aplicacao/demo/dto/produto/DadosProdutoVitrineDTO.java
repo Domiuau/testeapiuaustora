@@ -1,5 +1,6 @@
 package br.com.aplicacao.demo.dto.produto;
 
+
 import br.com.aplicacao.demo.entidades.Produto;
 import br.com.aplicacao.demo.entidades.Usuario;
 import br.com.aplicacao.demo.entidades.VariacaoProduto;
@@ -37,3 +38,4 @@ public record DadosProdutoVitrineDTO (String id,
                 produto.getVariacoesDoProduto().get(0).getTitulo());
     }
 }
+
