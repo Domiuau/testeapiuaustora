@@ -20,6 +20,7 @@ public record DadosProdutoVitrineDTO (String id,
                                       String imagemPrincipal,
                                       double preco,
                                       double precoDesconto,
+
                                       boolean freteGratis,
                                       boolean entregaFull,
                                       String titulo) {
