@@ -61,6 +61,7 @@ public class ProdutoController {
         AnunciarProdutoDTO anunciarProdutoDTO = gson.fromJson(request.getParameter("json"), AnunciarProdutoDTO.class);
 
         Produto produto = new Produto(anunciarProdutoDTO, usuario);
+        produto.getParcelas().forEach(parcelas -> System.out.println(parcelas.getId()));
 
         for (int i = 1; i <= produto.getVariacoesDoProduto().size(); i++) {
 
@@ -92,7 +93,7 @@ public class ProdutoController {
 
         produtoRepository.save(produto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Produto criado");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Produto criado ID: " + produto.getId());
 
     }
 

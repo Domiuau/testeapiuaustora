@@ -1,6 +1,7 @@
 package br.com.aplicacao.demo.entidades;
 
 import br.com.aplicacao.demo.dto.produto.AnunciarProdutoDTO;
+import br.com.aplicacao.demo.dto.produto.DadosParcelasDTO;
 import br.com.aplicacao.demo.enums.TipoDeGarantia;
 import br.com.aplicacao.demo.enums.categorias.Categoria;
 import br.com.aplicacao.demo.enums.EstadoDoProduto;
@@ -12,7 +13,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Entity(name = "produto")
@@ -47,7 +47,6 @@ public class Produto {
 
     private boolean freteGratis;
     private boolean entregaFull;
-
     private int diasDeGarantia;
 
 
@@ -56,6 +55,9 @@ public class Produto {
     private Usuario idUsuario;
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<VariacaoProduto> variacoesDoProduto = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Parcelas> parcelas = new ArrayList<>();
 
     public Produto(AnunciarProdutoDTO anunciarProdutoDTO, Usuario usuario) {
 
@@ -74,6 +76,7 @@ public class Produto {
         this.diasDeGarantia = anunciarProdutoDTO.duracaoGarantia();
         this.idUsuario = usuario;
         anunciarProdutoDTO.variacoes().forEach(variacao -> this.variacoesDoProduto.add(new VariacaoProduto(variacao, this)));
+        anunciarProdutoDTO.parcelas().forEach(parcelas -> this.parcelas.add(new Parcelas(parcelas, this)));
 
 
 
@@ -99,6 +102,26 @@ public class Produto {
     public void desativar() {
 
         this.ativo = false;
+    }
+
+    public DadosParcelasDTO getMelhorParcela() {
+
+        if (this.parcelas.isEmpty())
+            return null;
+
+        for (int i = this.parcelas.size() - 1; i >= 0 ; i--) {
+
+            Parcelas parcela = this.parcelas.get(i);
+
+            if (parcela.getJuros() == 0) {
+                return new DadosParcelasDTO(parcela.getVezes(), parcela.getJuros());
+            }
+        }
+
+
+        Parcelas parcela = this.parcelas.get(parcelas.size() - 1);
+
+        return new DadosParcelasDTO(parcela.getVezes(), parcela.getJuros());
     }
 
     public String getId() {
@@ -127,6 +150,14 @@ public class Produto {
 
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public List<Parcelas> getParcelas() {
+        return parcelas;
+    }
+
+    public void setParcelas(List<Parcelas> parcelas) {
+        this.parcelas = parcelas;
     }
 
     public void setCategoria(Categoria categoria) {

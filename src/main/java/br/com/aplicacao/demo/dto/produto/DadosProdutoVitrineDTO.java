@@ -21,7 +21,7 @@ public record DadosProdutoVitrineDTO (String id,
                                       String imagemPrincipal,
                                       double preco,
                                       double precoDesconto,
-
+                                      DadosParcelasDTO parcela,
                                       boolean freteGratis,
                                       boolean entregaFull,
                                       String titulo) {
@@ -33,6 +33,7 @@ public record DadosProdutoVitrineDTO (String id,
                 produto.getVariacoesDoProduto().get(0).getImagens().isEmpty() ? null : Base64.getEncoder().encodeToString(produto.getVariacoesDoProduto().get(0).getImagens().get(0).getImagem()),
                 produto.getVariacoesDoProduto().get(0).getPreco(),
                 produto.getVariacoesDoProduto().get(0).getPreco_desconto(),
+                produto.getMelhorParcela(),
                 produto.isFreteGratis(),
                 produto.isEntregaFull(),
                 produto.getVariacoesDoProduto().get(0).getTitulo());

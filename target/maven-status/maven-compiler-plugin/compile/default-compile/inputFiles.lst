@@ -5,10 +5,12 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controlle
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\ImagemVariacaoProdutoRepository.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\UsuarioRepository.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\postgre\TratadorDeErrosPg.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\DadosParcelasDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\DadosVariacaoProdutoDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\ImagemVariacaoProduto.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Produto.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\VariacaoProdutoRepository.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Parcelas.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\SecurityConfigurations.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\DadosProdutoVitrineDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\ProdutoRepository.java
@@ -35,6 +37,7 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\config\WebConfig.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Usuario.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\usuario\RegistroDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\ParcelasRepository.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\Teste.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\AutenticacaoController.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\EstadoDoProduto.java

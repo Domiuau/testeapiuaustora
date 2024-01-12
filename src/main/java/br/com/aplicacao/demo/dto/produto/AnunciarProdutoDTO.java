@@ -1,7 +1,5 @@
 package br.com.aplicacao.demo.dto.produto;
 
-import br.com.aplicacao.demo.entidades.Produto;
-import br.com.aplicacao.demo.entidades.VariacaoProduto;
 import br.com.aplicacao.demo.enums.EstadoDoProduto;
 import br.com.aplicacao.demo.enums.TipoDeGarantia;
 import br.com.aplicacao.demo.enums.categorias.Categoria;
@@ -20,7 +18,8 @@ public record AnunciarProdutoDTO (
         int duracaoGarantia,
         boolean freteGratis,
         boolean entregaFull,
-        List<VariacaoProdutoDTO> variacoes
+        List<VariacaoProdutoDTO> variacoes,
+        List<DadosParcelasDTO> parcelas
 
 ) {
 
