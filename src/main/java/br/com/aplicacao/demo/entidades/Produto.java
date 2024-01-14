@@ -5,14 +5,13 @@ import br.com.aplicacao.demo.dto.produto.DadosParcelasDTO;
 import br.com.aplicacao.demo.enums.TipoDeGarantia;
 import br.com.aplicacao.demo.enums.categorias.Categoria;
 import br.com.aplicacao.demo.enums.EstadoDoProduto;
-import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity(name = "produto")
@@ -34,9 +33,10 @@ public class Produto {
 
     private String descricao;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Categoria categoria;
-    @Enumerated(EnumType.STRING)
-    private SubCategoria subCategoria;
+
+    private String subCategoria;
 
     private String dataAnuncio;
     private boolean ativo;
@@ -164,11 +164,11 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public SubCategoria getSubCategoria() {
+    public String getSubCategoria() {
         return subCategoria;
     }
 
-    public void setSubCategoria(SubCategoria subCategoria) {
+    public void setSubCategoria(String subCategoria) {
         this.subCategoria = subCategoria;
     }
 

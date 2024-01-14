@@ -8,7 +8,6 @@ import br.com.aplicacao.demo.entidades.Produto;
 import br.com.aplicacao.demo.entidades.Usuario;
 import br.com.aplicacao.demo.entidades.VariacaoProduto;
 import br.com.aplicacao.demo.enums.categorias.Categoria;
-import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
 import br.com.aplicacao.demo.repository.ImagemVariacaoProdutoRepository;
 import br.com.aplicacao.demo.repository.ProdutoRepository;
 import br.com.aplicacao.demo.repository.UsuarioRepository;
@@ -29,7 +28,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/produto")
@@ -51,8 +49,6 @@ public class ProdutoController {
 
     @PostMapping("/anunciar")
     public ResponseEntity anunciarProduto(MultipartHttpServletRequest request, @RequestHeader(name = "Authorization") String token) throws IOException {
-
-        System.out.println("fghdfdghdfghdfg");
 
         var login = tokenService.validateToken(token.replace("Bearer ", ""));
         Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
@@ -78,21 +74,7 @@ public class ProdutoController {
 
         }
 
-        System.out.println("produto:");
-        System.out.println(produto.getDescricao());
-        for (VariacaoProduto variacao :
-                produto.getVariacoesDoProduto()) {
-            System.out.println(variacao.getTitulo());
-
-            for (ImagemVariacaoProduto imagem :
-                    variacao.getImagens()) {
-                System.out.println(imagem.getImagem());
-            }
-        }
-
-
         produtoRepository.save(produto);
-
         return ResponseEntity.status(HttpStatus.CREATED).body("Produto criado ID: " + produto.getId());
 
     }
@@ -124,13 +106,13 @@ public class ProdutoController {
 
     @GetMapping("/categorias")
     public ResponseEntity<List<Categoria>> getCategorias() {
-        return ResponseEntity.ok(Categoria.CATEGORIAS);
+        return ResponseEntity.ok(Categoria.getCategorias());
     }
 
     @GetMapping("/subcategorias/{categoria}")
-    public ResponseEntity<List<SubCategoria>> getSubCategorias(@PathVariable String categoria) {
+    public List<? extends Enum<?>> getSubCategorias(@PathVariable String categoria) {
         System.out.println("jhgdfghghj");
-        return ResponseEntity.ok(Categoria.valueOf(categoria).getSubCategorias());
+        return Categoria.valueOf(categoria).getSubCategorias();
     }
 
     @GetMapping("/categoria/{categoria}/{pagina}")
@@ -148,7 +130,7 @@ public class ProdutoController {
                                                                                  @PathVariable int pagina) {
 
         return ResponseEntity.ok(produtoRepository.findAllBySubCategoriaAndAtivoTrue(
-                PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort()), SubCategoria.valueOf(subCategoria)).map(DadosProdutoVitrineDTO::new));
+                PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort()), subCategoria).map(DadosProdutoVitrineDTO::new));
     }
 
     @GetMapping("/id/{id}")

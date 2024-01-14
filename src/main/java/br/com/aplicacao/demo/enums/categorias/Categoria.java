@@ -1,6 +1,6 @@
 package br.com.aplicacao.demo.enums.categorias;
 
-import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
+import br.com.aplicacao.demo.enums.categorias.subcategorias.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,60 +8,62 @@ import java.util.List;
 
 public enum Categoria {
 
+    Tecnologia(TecnologiaSubCategoria.class),
+    Esportes(EsportesSubCategoria.class),
+    Casa(CasaSubCategoria .class),
+    Beleza(BelezaSubCategoria.class),
+    Livros(LivrosSubCategoria.class),
+    Alimentos(AlimentosSubCategoria.class),
+    Automotivo(AutomotivoSubCategoria.class),
+    Brinquedos(BrinquedosSubCategoria.class),
+    Joias(JoiasSubCategoria.class),
+    Saude(SaudeSubCategoria.class),
+    Ferramentas(FerramentasSubCategoria.class),
+    Viagem(ViagemSubCategoria.class),
+    Musica(MusicaSubCategoria.class),
+    Animais(AnimaisSubCategoria.class),
+    Arte(ArteSubCategoria.class),
+    Fitness(FitnessSubCategoria.class),
+    Decoracao(DecoracaoSubCategoria.class),
+    Jogos(JogosSubCategoria.class),
+    Vestuario(VestuarioSubCategoria.class),
+    Eletronicos(EletronicosSubCategoria.class);
 
 
+    private String subCategoria;
 
-    CASA("casa", new ArrayList<>(
-            List.of(
-            SubCategoria.CASA1,
-            SubCategoria.CASA2,
-            SubCategoria.CASA3))),
+    Categoria(String subCategoria) {
 
-    CARRO("carro", new ArrayList<>(
-            List.of(
-            SubCategoria.CARRO1,
-         SubCategoria.CARRO2,
-         SubCategoria.CARRO3))),
+        this.subCategoria = subCategoria;
 
-    COMPUTADOR("computador", new ArrayList<>(
-            List.of(
-                    SubCategoria.COMPUTADOR1,
-                    SubCategoria.COMPUTADOR2,
-                    SubCategoria.COMPUTADOR3)));
-
-
-
-
-
-    public static ArrayList<Categoria> CATEGORIAS = new ArrayList<>(Arrays.asList(CASA, CARRO, COMPUTADOR));
-    private String categoria;
-    private ArrayList<SubCategoria> subCategorias;
-
-    private SubCategoria subCategoria;
-
-    Categoria(String categoria, ArrayList<SubCategoria> subCategorias) {
-
-        this.categoria = categoria;
-        this.subCategorias = subCategorias;
     }
 
-    public String getCategoria() {
-        return categoria;
+    private Class<? extends Enum<?>> subCategoriaEnum;
+
+    Categoria(Class<? extends Enum<?>> subCategoriaEnum) {
+        this.subCategoriaEnum = subCategoriaEnum;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public Class<? extends Enum<?>> getSubCategoriaEnum() {
+        return subCategoriaEnum;
     }
 
-    public ArrayList<SubCategoria> getSubCategorias() {
-        return subCategorias;
+    public List<? extends Enum<?>> getSubCategorias() {
+
+               return Arrays.stream(this.getSubCategoriaEnum().getEnumConstants()).toList();
+
     }
 
-    public void setSubCategoria(SubCategoria subCategoria) {
-        this.subCategoria = subCategorias.get(subCategorias.indexOf(subCategoria));
+    public static List<Categoria> getCategorias() {
+        return Arrays.asList(values());
     }
 
-    public SubCategoria  getSubCategoria() {
+    public void setSubCategoria(String subCategoria) {
+        this.subCategoria = subCategoria;
+    }
+
+
+    public String getSubCategoria() {
         return subCategoria;
     }
 }

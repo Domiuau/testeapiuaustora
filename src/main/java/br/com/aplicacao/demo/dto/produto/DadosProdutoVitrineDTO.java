@@ -2,17 +2,10 @@ package br.com.aplicacao.demo.dto.produto;
 
 
 import br.com.aplicacao.demo.entidades.Produto;
-import br.com.aplicacao.demo.entidades.Usuario;
-import br.com.aplicacao.demo.entidades.VariacaoProduto;
 import br.com.aplicacao.demo.enums.EstadoDoProduto;
 import br.com.aplicacao.demo.enums.TipoDeGarantia;
-import br.com.aplicacao.demo.enums.categorias.Categoria;
-import br.com.aplicacao.demo.enums.categorias.subcategorias.SubCategoria;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
 
 public record DadosProdutoVitrineDTO (String id,
                                       EstadoDoProduto estado,
