@@ -1,8 +1,6 @@
 package br.com.aplicacao.demo.controllers;
 
-import br.com.aplicacao.demo.dto.produto.AnunciarProdutoDTO;
-import br.com.aplicacao.demo.dto.produto.DadosProdutoDTO;
-import br.com.aplicacao.demo.dto.produto.DadosProdutoVitrineDTO;
+import br.com.aplicacao.demo.dto.produto.*;
 import br.com.aplicacao.demo.entidades.ImagemVariacaoProduto;
 import br.com.aplicacao.demo.entidades.Produto;
 import br.com.aplicacao.demo.entidades.Usuario;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +45,7 @@ public class ProdutoController {
 
     @Autowired
     TokenService tokenService;
+
 
     @PostMapping("/anunciar")
     public ResponseEntity anunciarProduto(MultipartHttpServletRequest request, @RequestHeader(name = "Authorization") String token) throws IOException {
@@ -126,8 +126,8 @@ public class ProdutoController {
 
     @GetMapping("/subcategoria/{subCategoria}/{pagina}")
     public ResponseEntity<Page<DadosProdutoVitrineDTO>> getProdutosPelaSubCategoria(@PathVariable String subCategoria,
-                                                                                 @PageableDefault(size = 3) Pageable pageable,
-                                                                                 @PathVariable int pagina) {
+                                                                                    @PageableDefault(size = 3) Pageable pageable,
+                                                                                    @PathVariable int pagina) {
 
         return ResponseEntity.ok(produtoRepository.findAllBySubCategoriaAndAtivoTrue(
                 PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort()), subCategoria).map(DadosProdutoVitrineDTO::new));
@@ -202,6 +202,53 @@ public class ProdutoController {
             return ResponseEntity.badRequest().body(id + " não encontrado");
         }
 
+
+    }
+
+    @GetMapping("/conjunto/categoria/aleatoria")
+    public ResponseEntity<DadosProdutoVitrineConjuntoAleatorioDTO> getConjuntoAleatorio(@PageableDefault Pageable pageable) {
+
+        Random random = new Random();
+        Categoria categoria = Categoria.getCategorias().get(random.nextInt(Categoria.getCategorias().size()));
+        String[] campos = {"descricao", "subCategoria", "fabricante", "diasDeGarantia", "tipoGarantia", "estado"};
+        int tamanhoPagina = (random.nextInt(3) + 2) * 2;
+        int totalPaginas = (produtoRepository.countByCategoria(categoria) / tamanhoPagina);
+
+
+        pageable = PageRequest.of(random.nextInt(Math.max(totalPaginas, 0)),
+                tamanhoPagina, Sort.by(Sort.Order.by(campos[random.nextInt(campos.length)]).with(Sort.Direction.ASC)));
+
+
+        return ResponseEntity.ok(new DadosProdutoVitrineConjuntoAleatorioDTO(
+                produtoRepository.findAllByCategoriaAndAtivoTrue(pageable, categoria).map(DadosProdutoVitrineDTO::new),
+                categoria,
+                categoria.getSubCategoria()
+
+        ));
+
+
+    }
+
+    @Transactional
+    @PostMapping("/anunciar/lista")
+    public ResponseEntity anunciarListaProdutos(@RequestBody ListaProdutosDTO listaProdutosDTO, @RequestHeader(name = "Authorization") String token) throws IOException {
+
+        var login = tokenService.validateToken(token.replace("Bearer ", ""));
+        Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
+
+        for (AnunciarProdutoDTO p:
+                listaProdutosDTO.anunciarProdutoDTOS()) {
+            Produto produto = new Produto(p, usuario);
+            System.out.println(produto);
+            produtoRepository.save(produto);
+
+        }
+
+
+
+
+
+        return ResponseEntity.ok("a");
 
     }
 

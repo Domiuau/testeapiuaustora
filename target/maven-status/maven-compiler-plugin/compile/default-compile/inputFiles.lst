@@ -13,6 +13,7 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\cat
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\repository\ProdutoRepository.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\categorias\subcategorias\DecoracaoSubCategoria.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\erros\TratadorDeErros.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\ListaProdutosDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\usuario\TodosOsDadosUsuarioDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\categorias\subcategorias\FitnessSubCategoria.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\ProdutoController.java
@@ -30,6 +31,7 @@ C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\security\
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\entidades\Usuario.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\categorias\subcategorias\EsportesSubCategoria.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\AnunciarProdutoDTO.java
+C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\dto\produto\DadosProdutoVitrineConjuntoAleatorioDTO.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\categorias\subcategorias\SaudeSubCategoria.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\enums\categorias\subcategorias\ViagemSubCategoria.java
 C:\Users\DomiU\Downloads\demo\demo\src\main\java\br\com\aplicacao\demo\controllers\UsuarioController.java

@@ -1,5 +1,7 @@
 import br.com.aplicacao.demo.enums.categorias.Categoria;
 
+import java.util.Random;
+
 public class TesteEnums {
 
     public static void main(String[] args) {
@@ -14,6 +16,8 @@ public class TesteEnums {
 
         System.out.println(categoria + " " + categoria.getSubCategorias());
        // System.out.println(Categoria.getCategorias());
+        Random random = new Random();
+        System.out.println(Categoria.getCategorias().get(random.nextInt(Categoria.getCategorias().size())));
 
 
 

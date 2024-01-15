@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Categoria {
+    CASA(TecnologiaSubCategoria.class),
+    COMPUTADOR(TecnologiaSubCategoria.class),
+    CARRO(TecnologiaSubCategoria.class),
+
 
     Tecnologia(TecnologiaSubCategoria.class),
     Esportes(EsportesSubCategoria.class),

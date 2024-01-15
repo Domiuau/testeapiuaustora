@@ -56,7 +56,7 @@ public class VariacaoProduto {
         this.preco = variacao.preco();
         this.preco_desconto = variacao.precoDesconto();
         this.produto = produto;
-        this.estoque = variacao.quantidade();
+        this.estoque = variacao.estoque();
     }
 
     @Override

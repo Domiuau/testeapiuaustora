@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
@@ -49,7 +51,13 @@ public class AutenticacaoController {
     }
 
 
+    @PostMapping("/autenticar")
+    public ResponseEntity autenticar(@RequestHeader(name = "Authorization") String token) {
 
+        var login = tokenService.validateToken(token.replace("Bearer ", ""));
+        Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
+        return ResponseEntity.ok(new DadosUsuarioDTO(usuario));
+    }
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AutenticacaoDTO autenticacaoDTO) {
