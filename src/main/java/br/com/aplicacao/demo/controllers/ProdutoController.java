@@ -220,7 +220,7 @@ public class ProdutoController {
 
 
         return ResponseEntity.ok(new DadosProdutoVitrineConjuntoAleatorioDTO(
-                produtoRepository.findAllByCategoriaAndAtivoTrue(pageable, categoria).map(DadosProdutoVitrineDTO::new),
+                produtoRepository.findAllByCategoriaAndAtivoTrue(pageable, categoria).map(DadosProdutoVitrineDTO::new).toList(),
                 categoria,
                 categoria.getSubCategoria()
 

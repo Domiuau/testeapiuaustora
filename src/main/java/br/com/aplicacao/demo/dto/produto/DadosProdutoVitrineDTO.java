@@ -4,6 +4,7 @@ package br.com.aplicacao.demo.dto.produto;
 import br.com.aplicacao.demo.entidades.Produto;
 import br.com.aplicacao.demo.enums.EstadoDoProduto;
 import br.com.aplicacao.demo.enums.TipoDeGarantia;
+import br.com.aplicacao.demo.enums.categorias.Categoria;
 
 import java.util.Base64;
 
@@ -17,7 +18,8 @@ public record DadosProdutoVitrineDTO (String id,
                                       DadosParcelasDTO parcela,
                                       boolean freteGratis,
                                       boolean entregaFull,
-                                      String titulo) {
+                                      String titulo,
+                                      Categoria categoria) {
 
 
 
@@ -29,7 +31,8 @@ public record DadosProdutoVitrineDTO (String id,
                 produto.getMelhorParcela(),
                 produto.isFreteGratis(),
                 produto.isEntregaFull(),
-                produto.getVariacoesDoProduto().get(0).getTitulo());
+                produto.getVariacoesDoProduto().get(0).getTitulo(),
+                produto.getCategoria());
     }
 }
 
