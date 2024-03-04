@@ -56,6 +56,7 @@ public class AutenticacaoController {
 
         var login = tokenService.validateToken(token.replace("Bearer ", ""));
         Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
+
         return ResponseEntity.ok(new DadosUsuarioDTO(usuario));
     }
 

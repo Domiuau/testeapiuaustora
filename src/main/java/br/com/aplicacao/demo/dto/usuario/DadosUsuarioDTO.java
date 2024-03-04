@@ -9,4 +9,5 @@ public record DadosUsuarioDTO(String apelido, String nomeDeUsuario, String email
     }
 
 
+
 }
