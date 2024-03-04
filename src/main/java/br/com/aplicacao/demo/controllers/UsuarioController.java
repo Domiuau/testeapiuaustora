@@ -44,22 +44,23 @@ public class UsuarioController {
         return ResponseEntity.ok("aaa");
     }
 
-    @Transactional
-    @GetMapping("/listagem/{pagina}")
-    public ResponseEntity<Page<DadosUsuarioDTO>> getPaginaUsuario(@PageableDefault(size = 2, sort = {"apelido"}) Pageable pageable, @PathVariable int pagina) {
-        System.out.println("fdsfdsdch");
-
-        pageable = PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort());
-
-        Page<Usuario> nextPage = usuarioRepository.findAll(pageable);
-
-
-
-
-        Page<DadosUsuarioDTO> nextPageDTO = nextPage.map(DadosUsuarioDTO::new);
-
-        return ResponseEntity.ok(nextPageDTO);
-    }
+//    @Transactional
+//    @GetMapping("/listagem/{pagina}")
+//    public ResponseEntity<Page<DadosUsuarioDTO>> getPaginaUsuario(@PageableDefault(size = 2, sort = {"apelido"}) Pageable pageable, @PathVariable int pagina) {
+//        System.out.println("fdsfdsdch");
+//
+//        pageable = PageRequest.of(pagina, pageable.getPageSize(), pageable.getSort());
+//
+//        Page<Usuario> nextPage = usuarioRepository.findAll(pageable);
+//
+//
+//
+//
+//        //Page<DadosUsuarioDTO> nextPageDTO = nextPage.map(DadosUsuarioDTO::new);
+//
+//        //return ResponseEntity.ok(nextPageDTO);
+//        return ResponseEntity.ok();
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity getUsuario (@PathVariable String id) {
@@ -68,7 +69,7 @@ public class UsuarioController {
 
         if (usuario.isPresent()) {
           //  return ResponseEntity.ok(new DadosUsuarioDTO(usuario.get(), usuarioRepository.quantidadeProdutosAnunciados(usuario.get().getId())));
-            return ResponseEntity.ok(new DadosUsuarioDTO(usuario.get()));
+            return ResponseEntity.ok(new DadosUsuarioDTO(usuario.get().getApelido(), usuario.get().getUsername(), usuario.get().getEmail(), usuario.get().getTelefone()));
 
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");

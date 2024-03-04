@@ -36,19 +36,19 @@ public class AutenticacaoController {
     @Autowired
     private TokenService tokenService;
 
-    @Transactional
-    @GetMapping("/aa")
-    public ResponseEntity<Page<DadosUsuarioDTO>> teste(@PageableDefault(size = 2, sort = {"apelido"}) Pageable pageable) {
-        System.out.println("fdsfdsdch");
-
-        Pageable nextPageable = pageable.next();
-
-        Page<Usuario> nextPage = usuarioRepository.findAll(nextPageable);
-
-        Page<DadosUsuarioDTO> nextPageDTO = nextPage.map(DadosUsuarioDTO::new);
-
-        return ResponseEntity.ok(nextPageDTO);
-    }
+//    @Transactional
+//    @GetMapping("/aa")
+//    public ResponseEntity<Page<DadosUsuarioDTO>> teste(@PageableDefault(size = 2, sort = {"apelido"}) Pageable pageable) {
+//        System.out.println("fdsfdsdch");
+//
+//        Pageable nextPageable = pageable.next();
+//
+//        Page<Usuario> nextPage = usuarioRepository.findAll(nextPageable);
+//
+//        Page<DadosUsuarioDTO> nextPageDTO = nextPage.map(DadosUsuarioDTO::new);
+//
+//        return ResponseEntity.ok(nextPageDTO);
+//    }
 
 
     @PostMapping("/autenticar")
@@ -57,7 +57,7 @@ public class AutenticacaoController {
         var login = tokenService.validateToken(token.replace("Bearer ", ""));
         Usuario usuario = (Usuario) usuarioRepository.findByUsername(login);
 
-        return ResponseEntity.ok(new DadosUsuarioDTO(usuario));
+        return ResponseEntity.ok(new DadosUsuarioDTO(usuario.getApelido(), usuario.getUsername(), usuario.getEmail(), usuario.getTelefone()));
     }
 
     @PostMapping("/login")

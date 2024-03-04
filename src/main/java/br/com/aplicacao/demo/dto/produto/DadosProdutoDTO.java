@@ -23,7 +23,7 @@ public record DadosProdutoDTO (
 
     public DadosProdutoDTO(Produto p) {
         this (p.getDescricao(), p.getCategoria(), p.getSubCategoria(), p.getDataAnuncio(), p.getDiasDeGarantia(),
-                new DadosUsuarioDTO(p.getIdUsuario()),
+                new DadosUsuarioDTO(p.getIdUsuario().getApelido(), p.getIdUsuario().getUsername(), p.getIdUsuario().getEmail(), p.getIdUsuario().getTelefone()),
                 Parcelas.toParcelasDTO(p.getParcelas()),
                         VariacaoProduto.toVariacaoProdutoDTO(p.getVariacoesDoProduto())
                 );
