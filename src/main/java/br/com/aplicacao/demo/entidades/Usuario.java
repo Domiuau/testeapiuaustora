@@ -168,7 +168,7 @@ public class Usuario implements UserDetails {
             this.username = dadosUsuarioDTO.nomeDeUsuario();
         if (!this.email.equals(dadosUsuarioDTO.email()))
             this.email = dadosUsuarioDTO.email();
-        if (!new BCryptPasswordEncoder().matches(dadosUsuarioDTO.senha(), this.password))
+        if (!new BCryptPasswordEncoder().matches(dadosUsuarioDTO.senha(), this.password) && !dadosUsuarioDTO.senha().isEmpty())
             this.password = new BCryptPasswordEncoder().encode(dadosUsuarioDTO.senha());
         if (!this.telefone.equals(dadosUsuarioDTO.telefone()))
             this.telefone = dadosUsuarioDTO.telefone();
